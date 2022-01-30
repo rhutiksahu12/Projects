@@ -3,11 +3,11 @@ import shortUUID from 'short-uuid';
 import Short from 'short-uuid';
 import { v4 as uuidv4 } from 'uuid';
 
-function Customerform() {
+function Customerform( props ) {
  
   const [ checkNumber, setCheckNumber] = useState("");
   const [ amount, setAmount ] = useState("");
-
+  const [ transactionType, setTransactionType] = useState('');
 
   const changeAmount = (e) => {
     setAmount(e.target.value)
@@ -23,8 +23,13 @@ function Customerform() {
       ID : shortUUID.generate(),
       Amount: amount,
       CheckNumber: checkNumber,
+      type: transactionType,
     }
+
+    props.newCustomer(transaction);
     console.log(transaction);
+    setAmount('');
+    setCheckNumber('');
 
   }
  
@@ -43,8 +48,18 @@ function Customerform() {
                   <input class="input" value={amount} type="number" onChange={changeAmount}  />
                 </div>
             </div>
-
-            <button type= "submit" class="button is-primary">Sign in</button>
+            <div class="select is-primary">
+              <select onChange = {(event) => {
+                setTransactionType(event.target.value)
+              }}> 
+                <option>Credit</option>
+                <option>Debit</option>
+              </select>
+            </div>
+            <br/>
+            <div>
+              <button type= "submit" class="button is-primary">Sign in</button>
+            </div>
         </form>
   );
 }

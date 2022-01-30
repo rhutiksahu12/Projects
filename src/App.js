@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Form from "./components/Customerform"
+import NewTransaction from './components/NewTransaction';
 function App() {
  
+  let transactionsList = [];
   
+
   return (
-    <Form />
+    <NewTransaction />
   );
 }
 export default App;
